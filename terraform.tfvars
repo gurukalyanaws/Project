@@ -1,0 +1,9 @@
+my_profile = "creds"
+aws_region = "us-east-1"
+vpc-cidr = "10.100.0.0/16"
+subnet_cidr = ["10.100.1.0/24", "10.100.2.0/24", "10.100.3.0/24"]
+availablity_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+ingress_cidr = "122.173.0.0/16"
+instance_count = "1"
+key_name = "MainKey"
+inst_type = "t2.micro"
