@@ -1,7 +1,7 @@
 resource "aws_instance" "servers" {
-  ami = "ami-0c02fb55956c7d316"
+  ami = "${lookup(var.amis, var.env, "")}"
   instance_type = "${var.inst_type}"
-  count = "${var.instance_count}"
+  count = "${lookup(var.instance_count, var.mode)}"
   associate_public_ip_address = "true"
   availability_zone = "${element(var.availablity_zones, count.index)}"
   subnet_id = "${element(aws_subnet.public_subnets.*.id, count.index)}"
@@ -9,7 +9,9 @@ resource "aws_instance" "servers" {
   tags = {
     "Name" = "Terraform-${count.index + 1}"
     "type" = "${var.env}"
+    "mode" = "${var.mode}"
   }
   key_name = "${var.key_name}"
   user_data = "${file("jenkins_maven_java.sh")}"
 }
+
